@@ -126,27 +126,26 @@ function generateInitialData(){
 function startSimulation(){
 	lag = Date.now();
 	initData = generateInitialData();
-	if isMason
+	if (isMason)
 		post(config.mason, {cmd: "START", data:initData});
 	post(config.ns3, {cmd: "START", data:initData});
 }
 
 function nextStep(){
 	lag = Date.now();
-	if isMason
+	if (isMason)
 		post(config.mason, {cmd: "NEXT"});
 	post(config.ns3, {cmd: "NEXT"});
 }
 
 function endSimulation(){
 	lag = Date.now();
-	if isMason
+	if (isMason)
 		post(config.mason, {cmd: "END"});
 	post(config.ns3, {cmd: "END"});
 }
 
 function controller(orig, msg){
-
 	io.sockets.emit('info', msg);
 }
 
