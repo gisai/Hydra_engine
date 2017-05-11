@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+    <title>SIMCYB-config</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css" >
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">SIMCYB</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="jumbotron starter-template">
+        <h1>Configuration</h1>
+        <div class="">
+          <form class="form-horizontal">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">MASON parameters</h3>
+              </div>
+              <div class="panel-body form-group form-inline">
+                <label for="inputEmail3" class="col-sm-2 control-label">MASON URL</label>
+                <div class="col-sm-10">
+                  http://
+                  <input type="text" class="form-control" id="inputLocalhost" placeholder="localhost" value="localhost">
+                  :
+                  <input type="number" class="form-control" id="inputPort" placeholder="port" value="8080">
+                  /
+                  <input type="text" class="form-control" id="inputPath" placeholder="path" value="func1">
+                  <button type="submit" class="btn btn-default">Check Connection</button>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">NS3 parameters</h3>
+              </div>
+              <div class="panel-body form-group form-inline">
+                <label for="inputEmail3" class="col-sm-2 control-label">NS3 URL</label>
+                <div class="col-sm-10">
+                  http://
+                  <input type="text" class="form-control" id="inputLocalhost" placeholder="localhost" value="localhost">
+                  :
+                  <input type="number" class="form-control" id="inputPort" placeholder="port" value="8080">
+                  /
+                  <input type="text" class="form-control" id="inputPath" placeholder="path" value="func1">
+                  <button type="submit" class="btn btn-default">Check Connection</button>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Scene parameters</h3>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="inputNumUsers" class="col-sm-2 control-label">Number of users</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" id="inputPassword3" placeholder="1">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Run visual simulation</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Batch simulation parameters</h3>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="inputNumSteps" class="col-sm-2 control-label">Number of steps</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" id="inputPassword3" placeholder="10">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputNumSims" class="col-sm-2 control-label">Number of simulations</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" id="inputPassword3" placeholder="1">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Run batch simulation</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div><!-- /.container -->
+
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

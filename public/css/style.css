@@ -1,0 +1,14 @@
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+}
+.control{
+	font-size: 30px;
+	z-index: 1;
+	width: 150px;
+	right: 0;
+	top: 30px;
+	position: fixed;
+}

@@ -1,0 +1,30 @@
+{
+	"mason":{
+		"name": "MASON",
+		"host": "localhost",
+		"port": 8080,
+		"path": "/func1"
+		},
+	"ns3":{
+		"name": "NS3",
+		"host": "localhost",
+		"port": 3005,
+		"path": "/ns3"
+		},
+	"engine":{
+		"port":3000
+		},
+	"scene1":{
+		"id":"scene",
+		"name":"Scene simulation",
+		"params":[	{"name":"Number of Users","id":"numUsers","placeholder":1,"type":"number"},
+					{"name":"Dimensions","id":"dimension","placeholder":100,"type":"number"},
+					{"name":"Random Multiplier","id":"randMult","placeholder":2,"type":"number"}]
+	},
+	"batch":{
+		"id":"scene",
+		"name":"Scene simulation",
+		"params":[	{"name":"Number of Steps","id":"numSteps","placeholder":10,"type":"number"},
+					{"name":"Number of Simulations","id":"numSims","placeholder":2,"type":"number"}]
+	}
+}

@@ -1,0 +1,40 @@
+<div class="jumbotron starter-template">
+  <h1>Configuration</h1>
+  <div class="">
+    <form class="form-horizontal">
+      <%- include('parameters_sim', {sim: config.mason}) -%>
+      <%- include('parameters_sim', {sim: config.ns3}) -%>
+      
+      <div class="panel panel-default" id="scene">
+        <div class="panel-heading">
+          <h3 class="panel-title">Scene parameters</h3>
+        </div>
+        <div class="panel-body">
+          <% config.scene1.params.forEach(function(param){ %>
+          <%- include('parameter', {param: param}) -%>
+          <% }); %>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default" id="runVisual"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Run visual simulation</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default" id="batch">
+        <div class="panel-heading">
+          <h3 class="panel-title">Batch simulation parameters</h3>
+        </div>
+        <div class="panel-body">
+          <% config.batch.params.forEach(function(param){ %>
+          <%- include('parameter', {param: param}) -%>
+          <% }); %>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Run batch simulation</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
