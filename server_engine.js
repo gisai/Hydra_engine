@@ -1,5 +1,5 @@
 const name = "HYDRA";
-const version = "0.0.3.2017.05.11";
+const version = "0.0.3.2017.05.13";
 const configurationFile = "config.json";
 const mason = "MASON";
 const ns3 = "NS3";
