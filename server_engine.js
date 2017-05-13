@@ -134,15 +134,15 @@ function startSimulation(){
 function nextStep(){
 	lag = Date.now();
 	if (isMason)
-		post(config.mason, {cmd: "NEXT"});
-	post(config.ns3, {cmd: "NEXT"});
+		post(config.mason, {cmd: "NEXT", data:""});
+	post(config.ns3, {cmd: "NEXT", data:""});
 }
 
 function endSimulation(){
 	lag = Date.now();
 	if (isMason)
-		post(config.mason, {cmd: "END"});
-	post(config.ns3, {cmd: "END"});
+		post(config.mason, {cmd: "END", data:""});
+	post(config.ns3, {cmd: "END", data:""});
 }
 
 function controller(orig, msg){

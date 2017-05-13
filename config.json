@@ -2,17 +2,17 @@
 	"mason":{
 		"name": "MASON",
 		"host": "localhost",
-		"port": 8080,
-		"path": "/func1"
+		"port": 3005,
+		"path": "/mason"
 		},
 	"ns3":{
 		"name": "NS3",
 		"host": "localhost",
-		"port": 3005,
+		"port": 3003,
 		"path": "/ns3"
 		},
 	"engine":{
-		"port":3000
+		"port":3004
 		},
 	"scene1":{
 		"id":"scene",
