@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:3000');
+var socket = io.connect(window.location.host);
 var canvas, context;
 var positions = new Array();
 var imageUser = new Image();

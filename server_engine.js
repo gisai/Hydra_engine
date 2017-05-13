@@ -32,7 +32,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/mason', function(req, res){
-	console.log("Lag: ",Date.now()-lag);
+	console.log("Lag Mason: ",Date.now()-lag);
 	res.send('');
 	var msg = req.body;
 	controller(0, msg);
@@ -40,7 +40,7 @@ app.post('/mason', function(req, res){
 });
 
 app.post('/ns3', function(req, res){
-	console.log("Lag: ",Date.now()-lag);
+	console.log("Lag ns3: ",Date.now()-lag);
 	res.send('{}');
 	var msg = req.body;
 	controller(3, msg);
@@ -125,7 +125,7 @@ function generateInitialPositions(){
 
 function startSimulation(){
 	lag = Date.now();
-	data = {nodes:generateInitialData()};
+	data = {nodes:generateInitialPositions()};
 	if (isMason)
 		post(config.mason, {cmd: "START", data:data});
 	post(config.ns3, {cmd: "START", data:data});
