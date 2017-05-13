@@ -114,21 +114,21 @@ io.on('connection', (socket) => {
 	});
 });
 
-function generateInitialData(){
-	var data =[];
-	data.append({id:0, type:"ROUTER", posX:params.dimensions/2, posY:params.dimensions/2});
+function generateInitialPositions(){
+	var nodes =[];
+	nodes.append({id:0, type:"ROUTER", posX:params.dimensions/2, posY:params.dimensions/2});
 	for (var i = 1; i <= params.numUsers; i++) {
-		data.append({id:i, type:"PERSON", posX:rand(0,params.dimensions), posY:rand(0,params.dimensions)});
+		nodes.append({id:i, type:"PERSON", posX:rand(0,params.dimensions), posY:rand(0,params.dimensions)});
 	}
-	return data;
+	return nodes;
 }
 
 function startSimulation(){
 	lag = Date.now();
-	initData = generateInitialData();
+	data = {nodes:generateInitialData()};
 	if (isMason)
-		post(config.mason, {cmd: "START", data:initData});
-	post(config.ns3, {cmd: "START", data:initData});
+		post(config.mason, {cmd: "START", data:data});
+	post(config.ns3, {cmd: "START", data:data});
 }
 
 function nextStep(){
@@ -197,5 +197,5 @@ function post(dest, msg){
 }
 
 function rand(init, end){
-	return (end-init)*Math.round(Math.random()/100)*100+init;
+	return Math.round((end-init)*Math.random()/100)*100+init;
 }
