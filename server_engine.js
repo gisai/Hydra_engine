@@ -6,7 +6,7 @@ const ns3 = "NS3";
 const cmdStart = "START";
 const cmdNext = "NEXT";
 const cmdEnd = "END";
-const isMason = false;
+const isMason = true;
 const scenes = [{id:0, name:"Scene 0", description:"Several users with mobile phones move around a router, connecting and disconnecting from the WiFi."},
 	{id:1, name:"Scene 1", description:"Sensing environment"},
 	{id:2, name:"Scene 2", description:"Building B at the ETSIT"},
@@ -93,9 +93,9 @@ const server = app.listen(port, function () {
 const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
-	console.log('a user connected');
+	console.log('User connected');
 	socket.on('disconnect', () => {
-		console.log('user disconnected');
+		console.log('User disconnected');
 		//endSimulation();
 	});
 	socket.on('config', function (data) {
@@ -110,7 +110,6 @@ io.on('connection', (socket) => {
 		} else if (data == "END"){
 			endSimulation();
 		}
-		console.log(data);
 	});
 });
 
@@ -175,7 +174,7 @@ function sendCmd(dest, order, data){
 }
 
 function post(dest, msg){
-	console.log("Sending message: ", msg, " to ", dest.name);
+	console.log("Sending message: ", msg.cmd, " to ", dest.name);
 	var data = JSON.stringify(msg);
 	var options = {
 		host: dest.host,
