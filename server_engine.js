@@ -126,7 +126,7 @@ function generateInitialPositions(){
 function startSimulation(){
 	lag = Date.now();
 	data = {nodes:generateInitialPositions(), numUsers:params.numUsers, 
-		numSteps: params.numSteps, dimension:params.dimension};
+		randMult: params.randMult, dimension:params.dimension};
 	if (isMason)
 		post(config.mason, {cmd: "START", data:data});
 	if (isNS3)
