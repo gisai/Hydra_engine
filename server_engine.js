@@ -7,6 +7,7 @@ const cmdStart = "START";
 const cmdNext = "NEXT";
 const cmdEnd = "END";
 const isMason = true;
+const isNS3 = false;
 const scenes = [{id:0, name:"Scene 0", description:"Several users with mobile phones move around a router, connecting and disconnecting from the WiFi."},
 	{id:1, name:"Scene 1", description:"Sensing environment"},
 	{id:2, name:"Scene 2", description:"Building B at the ETSIT"},
@@ -127,7 +128,8 @@ function startSimulation(){
 	data = {nodes:generateInitialPositions()};
 	if (isMason)
 		post(config.mason, {cmd: "START", data:data});
-	post(config.ns3, {cmd: "START", data:data});
+	if (isNS3)
+		post(config.ns3, {cmd: "START", data:data});
 }
 
 function nextStep(){
@@ -135,14 +137,16 @@ function nextStep(){
 	data = {tstep: 200}
 	if (isMason)
 		post(config.mason, {cmd: "NEXT", data:data});
-	post(config.ns3, {cmd: "NEXT", data:data});
+	if (isNS3)
+		post(config.ns3, {cmd: "NEXT", data:data});
 }
 
 function endSimulation(){
 	lag = Date.now();
 	if (isMason)
 		post(config.mason, {cmd: "END", data:""});
-	post(config.ns3, {cmd: "END", data:""});
+	if (isNS3)
+		post(config.ns3, {cmd: "END", data:""});
 }
 
 function controller(orig, msg){
