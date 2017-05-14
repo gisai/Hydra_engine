@@ -133,9 +133,10 @@ function startSimulation(){
 
 function nextStep(){
 	lag = Date.now();
+	data = {tstep: 200}
 	if (isMason)
-		post(config.mason, {cmd: "NEXT", data:""});
-	post(config.ns3, {cmd: "NEXT", data:""});
+		post(config.mason, {cmd: "NEXT", data:data});
+	post(config.ns3, {cmd: "NEXT", data:data});
 }
 
 function endSimulation(){
