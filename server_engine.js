@@ -88,7 +88,7 @@ io.on('connection', (socket) => {
 
 function generateInitialPositions(){
 	var nodes =[];
-	nodes.push({id:0, type:"ROUTER", posX:params.dimension/2, posY:params.dimension/2});
+	nodes.push({id:0, type:"ROUTER", x:params.dimension/2, y:params.dimension/2});
 	for (var i = 1; i <= params.numUsers; i++) {
 		nodes.push({id:i, type:"PERSON", x:rand(0,params.dimension), y:rand(0,params.dimension)});
 	}
