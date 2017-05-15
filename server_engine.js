@@ -20,7 +20,7 @@ var fs = require('fs');
 var app = express();
 var http = require('http');
 //app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.text());//json()
+app.use(bodyParser.json());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', './views')
