@@ -7,7 +7,7 @@ const cmdStart = "START";
 const cmdNext = "NEXT";
 const cmdEnd = "END";
 const isMason = true;
-const isNS3 = false;
+const isNS3 = true;
 const scenes = [{id:0, name:"Scene 0", description:"Several users with mobile phones move around a router, connecting and disconnecting from the WiFi."},
 	{id:1, name:"Scene 1", description:"Sensing environment"},
 	{id:2, name:"Scene 2", description:"Building B at the ETSIT"},
@@ -19,7 +19,7 @@ var fs = require('fs');
 var app = express();
 var http = require('http');
 //app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());//text()
+app.use(bodyParser.text());//json()
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', './views')
@@ -36,14 +36,15 @@ app.post('/mason', function(req, res){
 	console.log("Lag Mason: ",Date.now()-lag);
 	res.send('');
 	var msg = req.body;
+	console.log("/mason ",msg);
 	controller(0, msg);
-	
 });
 
 app.post('/ns3', function(req, res){
 	console.log("Lag ns3: ",Date.now()-lag);
 	res.send('{}');
 	var msg = req.body;
+	console.log("/ns3 ",msg);
 	controller(3, msg);
 });
 
@@ -151,7 +152,9 @@ function endSimulation(){
 }
 
 function controller(orig, msg){
-	io.sockets.emit('info', msg);
+	if (orig == 0){
+		io.sockets.emit('info', msg);
+	}
 }
 
 function demo(){
