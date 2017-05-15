@@ -9,7 +9,7 @@ imageRouter.src = "images/router.png";
 socket.on('connect', function () {
 	socket.emit('hi!');
 	socket.on('info', function(msg) {
-		info(JSON.parse(msg));
+		info(msg);
 	});
 });
 
@@ -66,7 +66,8 @@ function runVisual(){
 	    context = canvas.getContext('2d');
 		window.addEventListener('resize', resizeCanvas, false);
 		window.addEventListener('keypress', nextStep, false);
-		resizeCanvas();
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
 	});
 }
 

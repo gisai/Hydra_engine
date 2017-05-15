@@ -122,12 +122,14 @@ function controller(orig, msg){
 	console.log("Lag "+orig+": ",Date.now()-lag);
 	console.log("/"+orig+": ",msg);
 	if (orig == origin.mason){
-		for (var i = msg.data.length - 1; i >= 0; i--) {
-			var node = msg.data[i];
-			simData[node.id].x = node.x;
-			simData[node.id].y = node.y;
+		if(state == "NEXT"){
+			for (var i = msg.data.length - 1; i >= 0; i--) {
+				var node = msg.data[i];
+				simData[node.id].x = node.x;
+				simData[node.id].y = node.y;
+			}
+			io.sockets.emit('info', simData);
 		}
-		io.sockets.emit('info', simData);
 	} else if (orig == origin.ns3){
 		if(state == "NEXT"){
 			data = {nodes: msg.data, tstep: 1000}
