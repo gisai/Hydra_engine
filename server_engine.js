@@ -125,8 +125,8 @@ function controller(orig, msg){
 		if(state == "NEXT"){
 			for (var i = msg.data.length - 1; i >= 0; i--) {
 				var node = msg.data[i];
-				simData[node.id].x = node.x;
-				simData[node.id].y = node.y;
+				simData.nodes[node.id].x = node.x;
+				simData.nodes[node.id].y = node.y;
 			}
 			io.sockets.emit('info', simData);
 		}
