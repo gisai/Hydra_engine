@@ -8,6 +8,7 @@ const cmdNext = "NEXT";
 const cmdEnd = "END";
 const isMason = true;
 const isNS3 = true;
+const origin = {mason:"Mason", ns3:"ns3"};
 const scenes = [{id:0, name:"Scene 0", description:"Several users with mobile phones move around a router, connecting and disconnecting from the WiFi."},
 	{id:1, name:"Scene 1", description:"Sensing environment"},
 	{id:2, name:"Scene 2", description:"Building B at the ETSIT"},
@@ -25,6 +26,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views')
 const config = JSON.parse(fs.readFileSync(configurationFile));
 const port = process.env.PORT || config.engine.port;
+
 var params = {};
 var lag;
 var state;
@@ -34,19 +36,13 @@ app.get('/', function(req, res) {
 });
 
 app.post('/mason', function(req, res){
-	console.log("Lag Mason: ",Date.now()-lag);
-	res.send('');
-	var msg = req.body;
-	console.log("/mason: ",msg);
-	controller(0, msg);
+	res.send('{}');
+	controller(orig.mason, req.body);
 });
 
 app.post('/ns3', function(req, res){
-	console.log("Lag ns3: ",Date.now()-lag);
 	res.send('{}');
-	var msg = req.body;
-	console.log("/ns3: ",msg);
-	controller(3, msg);
+	controller(orig.ns3, req.body);
 });
 
 app.get('/scene/:id', function(req, res){
@@ -102,49 +98,42 @@ function generateInitialPositions(){
 
 function startSimulation(){
 	lag = Date.now();
+	state = "START";
 	data = {nodes:generateInitialPositions(), numUsers:params.numUsers, 
 		randMult: params.randMult, dimension:params.dimension};
-	if (isMason)
-		post(config.mason, {cmd: "START", data:data});
-	if (isNS3)
-		post(config.ns3, {cmd: "START", data:data});
+	post(config.mason, "START", data);
+	post(config.ns3, "START", data);
 }
 
 function nextStep(){
 	lag = Date.now();
-	data = {tstep: 200}
-	if (isMason)
-		post(config.mason, {cmd: "NEXT", data:data});
-	if (isNS3)
-		post(config.ns3, {cmd: "NEXT", data:data});
+	state = "NEXT";
+	data = {tstep: 1000}
+	post(config.ns3, "NEXT", data);
 }
 
 function endSimulation(){
 	lag = Date.now();
-	if (isMason)
-		post(config.mason, {cmd: "END", data:""});
-	if (isNS3)
-		post(config.ns3, {cmd: "END", data:""});
+	state = "END";
+	post(config.mason, ¡"END", "");
+	post(config.ns3, "END", "");
 }
 
 function controller(orig, msg){
-	if (orig == 0){
+	console.log("Lag "+orig+": ",Date.now()-lag);
+	console.log("/"+orig+": ",msg);
+	if (orig == origin.mason){
 		io.sockets.emit('info', msg);
+	} else if (orig == origin.ns3){
+		if(state == "NEXT"){
+			data = {nodes: msg.data, tstep: 1000}
+			post(config.mason, "NEXT", data);
+		}
 	}
 }
 
-function scheduleMessage(dest, message, time){
-	setTimeout(function() {
-		lag = Date.now();
-		post(dest, message);
-	}, time);
-}
-
-function sendCmd(dest, order, data){
-	post(dest, {cmd: order, data: data});
-}
-
-function post(dest, msg){
+function post(dest, cmd, data){
+	var msg = {cmd:cmd, data:data};
 	console.log("Sending message: ", msg.cmd, " to ", dest.name);
 	var data = JSON.stringify(msg);
 	var options = {
