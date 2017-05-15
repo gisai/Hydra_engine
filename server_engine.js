@@ -36,7 +36,7 @@ app.post('/mason', function(req, res){
 	console.log("Lag Mason: ",Date.now()-lag);
 	res.send('');
 	var msg = req.body;
-	console.log("/mason ",msg);
+	console.log("/mason: ",msg);
 	controller(0, msg);
 });
 
@@ -44,7 +44,7 @@ app.post('/ns3', function(req, res){
 	console.log("Lag ns3: ",Date.now()-lag);
 	res.send('{}');
 	var msg = req.body;
-	console.log("/ns3 ",msg);
+	console.log("/ns3: ",msg);
 	controller(3, msg);
 });
 
@@ -205,5 +205,5 @@ function post(dest, msg){
 }
 
 function rand(init, end){
-	return Math.round((end-init)*Math.random()/100)*100+init;
+	return Math.round((end-init)*Math.random()*100)/100+init;
 }
