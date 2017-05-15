@@ -28,8 +28,7 @@ const config = JSON.parse(fs.readFileSync(configurationFile));
 const port = process.env.PORT || config.engine.port;
 
 var params = {};
-var lag;
-var state;
+var lag, state, simData;
 
 app.get('/', function(req, res) {
 	res.render('index', {scenes:scenes, name:name});
@@ -91,7 +90,7 @@ function generateInitialPositions(){
 	var nodes =[];
 	nodes.push({id:0, type:"ROUTER", posX:params.dimension/2, posY:params.dimension/2});
 	for (var i = 1; i <= params.numUsers; i++) {
-		nodes.push({id:i, type:"PERSON", posX:rand(0,params.dimension), posY:rand(0,params.dimension)});
+		nodes.push({id:i, type:"PERSON", x:rand(0,params.dimension), y:rand(0,params.dimension)});
 	}
 	return nodes;
 }
@@ -99,31 +98,36 @@ function generateInitialPositions(){
 function startSimulation(){
 	lag = Date.now();
 	state = "START";
-	data = {nodes:generateInitialPositions(), numUsers:params.numUsers, 
+	simData = {nodes:generateInitialPositions(), numUsers:params.numUsers, 
 		randMult: params.randMult, dimension:params.dimension};
-	post(config.mason, "START", data);
-	post(config.ns3, "START", data);
+	post(config.mason, state, simData);
+	post(config.ns3, state, simData);
+	io.sockets.emit('info', simData);
 }
 
 function nextStep(){
 	lag = Date.now();
 	state = "NEXT";
-	data = {tstep: 1000}
-	post(config.ns3, "NEXT", data);
+	post(config.ns3, state, {nodes:simData.nodes, tstep: 1000});
 }
 
 function endSimulation(){
 	lag = Date.now();
 	state = "END";
-	post(config.mason, "END", "");
-	post(config.ns3, "END", "");
+	post(config.mason, state, "");
+	post(config.ns3, state, "");
 }
 
 function controller(orig, msg){
 	console.log("Lag "+orig+": ",Date.now()-lag);
 	console.log("/"+orig+": ",msg);
 	if (orig == origin.mason){
-		io.sockets.emit('info', msg);
+		for (var i = msg.data.length - 1; i >= 0; i--) {
+			var node = msg.data[i];
+			simData[node.id].x = node.x;
+			simData[node.id].y = node.y;
+		}
+		io.sockets.emit('info', simData);
 	} else if (orig == origin.ns3){
 		if(state == "NEXT"){
 			data = {nodes: msg.data, tstep: 1000}

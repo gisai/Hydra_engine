@@ -1,6 +1,6 @@
 var socket = io.connect(window.location.host);
 var canvas, context;
-var positions = new Array();
+var simData;
 var imageUser = new Image();
 imageUser.src = "images/man.png";
 var imageRouter = new Image();
@@ -84,7 +84,7 @@ function endSimulation(){
 }
 
 function info(msg){//Message INFO from engine
-	positions = msg.data;
+	simData = msg;
 	redraw();
 }
 
@@ -94,13 +94,13 @@ function info(msg){//Message INFO from engine
 const delta = 5;
 function redraw() {
 	context.clearRect(0,0,canvas.width, canvas.height);
-	for (var i = positions.length - 1; i >= 0; i--) {
-		image;
-		if(positions[i].type == "PERSON")
-			image=imageUser
-		else if(positions[i].type == "ROUTER")
-			image=imageRouter
-		context.drawImage(image,delta*positions[i].x,delta*positions[i].y,20,20);
+	for (var i = simData.nodes.length - 1; i >= 0; i--) {
+		var image;
+		if(simData.nodes[i].type == "PERSON")
+			image = imageUser;
+		else if(simData.nodes[i].type == "ROUTER")
+			image = imageRouter;
+		context.drawImage(image,delta*simData.nodes[i].x,delta*simData.nodes[i].y,20,20);
 	}
 }
 
