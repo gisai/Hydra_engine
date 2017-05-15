@@ -115,7 +115,7 @@ function nextStep(){
 function endSimulation(){
 	lag = Date.now();
 	state = "END";
-	post(config.mason, ¡"END", "");
+	post(config.mason, "END", "");
 	post(config.ns3, "END", "");
 }
 
