@@ -27,6 +27,7 @@ const config = JSON.parse(fs.readFileSync(configurationFile));
 const port = process.env.PORT || config.engine.port;
 var params = {};
 var lag;
+var state;
 
 app.get('/', function(req, res) {
 	res.render('index', {scenes:scenes, name:name});
@@ -46,31 +47,6 @@ app.post('/ns3', function(req, res){
 	var msg = req.body;
 	console.log("/ns3: ",msg);
 	controller(3, msg);
-});
-
-app.get('/demo', function(req, res){//Comentar
-	res.send('Ejecutando DEMO');
-	demo();
-});
-
-app.get('/demo/msg', function(req, res){//Comentar
-	res.send('Ejecutando DEMO msg');
-	sendCmd(config.ns3, "DEMO", {numUsers: 25});
-});
-
-app.get('/demo/start', function(req, res){//Comentar
-	res.send('Enviando start');
-	sendCmd(config.ns3, "START", {numUsers: 25});
-});
-
-app.get('/demo/next', function(req, res){//Comentar
-	res.send('Enviando next');
-	sendCmd(config.ns3, "NEXT", {numUsers: 25});
-});
-
-app.get('/demo/end', function(req, res){//Comentar
-	res.send('Enviando end');
-	sendCmd(config.ns3, "END", {numUsers: 25});
 });
 
 app.get('/scene/:id', function(req, res){
@@ -155,19 +131,6 @@ function controller(orig, msg){
 	if (orig == 0){
 		io.sockets.emit('info', msg);
 	}
-}
-
-function demo(){
-	var i = 1;
-	var lag = 0;
-	var numUsers = 20;
-	var numSteps = 2;
-	var delay = 1000;
-	scheduleMessage(config.ns3, {cmd: "START", data:{numUsers:numUsers}}, i*delay);
-	for (i = 2; i < numSteps+2; i++) {
-		scheduleMessage(config.ns3, {cmd: "NEXT", data:""}, i*delay);
-	}
-	scheduleMessage(config.ns3, {cmd: "END", data:""}, i*delay);
 }
 
 function scheduleMessage(dest, message, time){
