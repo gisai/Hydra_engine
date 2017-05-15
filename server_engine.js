@@ -37,12 +37,12 @@ app.get('/', function(req, res) {
 
 app.post('/mason', function(req, res){
 	res.send('{}');
-	controller(orig.mason, req.body);
+	controller(origin.mason, req.body);
 });
 
 app.post('/ns3', function(req, res){
 	res.send('{}');
-	controller(orig.ns3, req.body);
+	controller(origin.ns3, req.body);
 });
 
 app.get('/scene/:id', function(req, res){
