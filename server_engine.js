@@ -133,7 +133,7 @@ function controller(orig, msg){
 		}
 	} else if (orig == origin.ns3){
 		if(state == "NEXT"){
-			for (var i = msg.data.length - 1; i >= 0; i--) {
+			for (var i = msg.data.nodes.length - 1; i >= 0; i--) {
 				var node = msg.data.nodes[i];
 				simData.nodes[node.id].connected = node.connected;
 			}
