@@ -124,8 +124,8 @@ function controller(orig, msg){
 	console.log("/"+orig+": ",msg);
 	if (orig == origin.mason){
 		if(state == "NEXT"){
-			for (var i = msg.data.length - 1; i >= 0; i--) {
-				var node = msg.data[i];
+			for (var i = msg.data.nodes.length - 1; i >= 0; i--) {
+				var node = msg.data.nodes[i];
 				simData.nodes[node.id].x = node.x;
 				simData.nodes[node.id].y = node.y;
 			}
