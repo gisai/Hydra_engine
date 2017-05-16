@@ -137,7 +137,7 @@ function controller(orig, msg){
 				var node = msg.data.nodes[i];
 				simData.nodes[node.id].connected = node.connected;
 			}
-			data = {nodes: msg.data, tstep: TSTEP}
+			data = {nodes: msg.data.nodes, tstep: TSTEP}
 			post(config.mason, "NEXT", data);
 		}
 	}
