@@ -3,6 +3,8 @@ var canvas, context;
 var simData;
 var imageUser = new Image();
 imageUser.src = "images/man.png";
+var imageUser_connected = new Image();
+imageUser.src = "images/man_green.png";
 var imageRouter = new Image();
 imageRouter.src = "images/router.png";
 
@@ -96,12 +98,16 @@ const delta = 5;
 function redraw() {
 	context.clearRect(0,0,canvas.width, canvas.height);
 	for (var i = simData.nodes.length - 1; i >= 0; i--) {
+		var node = simData.nodes[i];
 		var image;
-		if(simData.nodes[i].type == "PERSON")
-			image = imageUser;
-		else if(simData.nodes[i].type == "ROUTER")
+		if(node.type == "PERSON"){
+			if (node.connected)
+				image = imageUser_connected;
+			else
+				image = imageUser;
+		}else if(node.type == "ROUTER")
 			image = imageRouter;
-		context.drawImage(image,delta*simData.nodes[i].x,delta*simData.nodes[i].y,20,20);
+		context.drawImage(image,delta*node.x,delta*node.y,30,30);
 	}
 }
 
