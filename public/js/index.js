@@ -8,6 +8,8 @@ imageUser.src = "images/man_green.png";
 var imageRouter = new Image();
 imageRouter.src = "images/router.png";
 
+var delta = 1;
+
 socket.on('connect', function () {
 	socket.emit('hi!');
 	socket.on('info', function(msg) {
@@ -94,7 +96,7 @@ function info(msg){//Message INFO from engine
 /*
 	----VISUAL----
 */
-const delta = 5;
+
 function redraw() {
 	context.clearRect(0,0,canvas.width, canvas.height);
 	for (var i = simData.nodes.length - 1; i >= 0; i--) {
@@ -117,5 +119,7 @@ function redraw() {
 function resizeCanvas() {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
+	if (simData.dimension)
+		delta = canvas.height/simData.dimension;
 	redraw(); 
 }
