@@ -134,7 +134,7 @@ function controller(orig, msg){
 	} else if (orig == origin.ns3){
 		if(state == "NEXT"){
 			for (var i = msg.data.length - 1; i >= 0; i--) {
-				var node = msg.data[i];
+				var node = msg.data.nodes[i];
 				simData.nodes[node.id].connected = node.connected;
 			}
 			data = {nodes: msg.data, tstep: TSTEP}
