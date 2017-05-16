@@ -4,7 +4,7 @@ var simData;
 var imageUser = new Image();
 imageUser.src = "images/man.png";
 var imageUser_connected = new Image();
-imageUser.src = "images/man_green.png";
+imageUser_connected.src = "images/man_green.png";
 var imageRouter = new Image();
 imageRouter.src = "images/router.png";
 
