@@ -101,12 +101,15 @@ function redraw() {
 		var node = simData.nodes[i];
 		var image;
 		if(node.type == "PERSON"){
-			if (node.connected)
+			if (node.connected){
 				image = imageUser_connected;
-			else
+			}
+			else{
 				image = imageUser;
-		}else if(node.type == "ROUTER")
+			}
+		} else if (node.type == "ROUTER"){
 			image = imageRouter;
+		}
 		context.drawImage(image,delta*node.x,delta*node.y,30,30);
 	}
 }
