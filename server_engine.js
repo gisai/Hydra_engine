@@ -8,7 +8,6 @@ const cmdNext = "NEXT";
 const cmdEnd = "END";
 const isMason = true;
 const isNS3 = true;
-const TSTEP = 1000;
 const origin = {mason:"Mason", ns3:"ns3"};
 const scenes = [{id:0, name:"Scene 0", description:"Several users with mobile phones move around a router, connecting and disconnecting from the WiFi."},
 	{id:1, name:"Scene 1", description:"Sensing environment"},
@@ -109,7 +108,7 @@ function startSimulation(){
 function nextStep(){
 	lag = Date.now();
 	state = "NEXT";
-	post(config.ns3, state, {nodes:simData.nodes, tstep: TSTEP});
+	post(config.ns3, state, {nodes:simData.nodes, tstep: simData.tstep});
 }
 
 function endSimulation(){
@@ -137,7 +136,7 @@ function controller(orig, msg){
 				var node = msg.data.nodes[i];
 				simData.nodes[node.id].connected = node.connected;
 			}
-			data = {nodes: msg.data.nodes, tstep: TSTEP}
+			data = {nodes: msg.data.nodes, tstep: simData.tstep}
 			post(config.mason, "NEXT", data);
 		}
 	}

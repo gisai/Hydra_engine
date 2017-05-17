@@ -18,8 +18,9 @@
 		"id":"scene",
 		"name":"Scene simulation",
 		"params":[	{"name":"Number of Users","id":"numUsers","placeholder":10,"type":"number"},
-					{"name":"Dimensions","id":"dimension","placeholder":100,"type":"number"},
-					{"name":"Random Multiplier","id":"randMult","placeholder":2,"type":"number"}]
+					{"name":"Dimensions","id":"dimension","placeholder":400,"type":"number"},
+					{"name":"Random Multiplier","id":"randMult","placeholder":20,"type":"number"},
+					{"name":"Tstep(ms)","id":"tstep","placeholder":1000,"type":"number"}]
 	},
 	"batch":{
 		"id":"scene",
