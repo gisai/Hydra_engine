@@ -99,7 +99,7 @@ function startSimulation(){
 	lag = Date.now();
 	state = "START";
 	simData = {nodes:generateInitialPositions(), numUsers:params.numUsers, 
-		randMult: params.randMult, dimension:params.dimension};
+		randMult: params.randMult, dimension:params.dimension, tstep: params.tstep};
 	post(config.mason, state, simData);
 	post(config.ns3, state, simData);
 	io.sockets.emit('info', simData);
