@@ -115,8 +115,8 @@ function nextStep(){
 function endSimulation(){
 	lag = Date.now();
 	state = "END";
-	post(config.mason, state, "");
-	post(config.ns3, state, "");
+	post(config.mason, state, {});
+	post(config.ns3, state, {});
 }
 
 function controller(orig, msg){
