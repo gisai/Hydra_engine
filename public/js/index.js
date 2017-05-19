@@ -112,7 +112,7 @@ function redraw() {
 		} else if (node.type == "ROUTER"){
 			image = imageRouter;
 		}
-		context.drawImage(image,delta*node.x,delta*node.y,30,30);
+		context.drawImage(image,delta*node.x,delta*node.y,30,img.height * 30 / img.width);
 	}
 }
 
