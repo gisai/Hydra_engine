@@ -120,7 +120,7 @@ function endSimulation(){
 
 function controller(orig, msg){
 	console.log("Lag "+orig+": ",Date.now()-lag);
-	console.log("/"+orig+": ",msg);
+	console.log("Message at /"+orig);
 	if (orig == origin.mason){
 		if(state == "NEXT"){
 			for (var i = msg.data.nodes.length - 1; i >= 0; i--) {
