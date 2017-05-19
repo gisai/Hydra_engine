@@ -72,6 +72,8 @@ function runVisual(){
 		window.addEventListener('keypress', nextStep, false);
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
+		if (simData.dimension)
+			delta = canvas.height/simData.dimension;
 	});
 }
 
@@ -112,7 +114,7 @@ function redraw() {
 		} else if (node.type == "ROUTER"){
 			image = imageRouter;
 		}
-		context.drawImage(image,delta*node.x,delta*node.y,30,img.height * 30 / img.width);
+		context.drawImage(image,delta*node.x,delta*node.y,30,image.height * 30 / image.width);
 	}
 }
 
