@@ -1,6 +1,9 @@
 var socket = io.connect(window.location.host);
 var canvas, context;
 var simData;
+var delta = 1;
+const SIZE = 30;
+
 var imageUser = new Image();
 imageUser.src = "images/man.png";
 var imageUser_connected = new Image();
@@ -8,7 +11,6 @@ imageUser_connected.src = "images/man_green.png";
 var imageRouter = new Image();
 imageRouter.src = "images/router.png";
 
-var delta = 1;
 
 socket.on('connect', function () {
 	socket.emit('hi!');
@@ -72,8 +74,6 @@ function runVisual(){
 		window.addEventListener('keypress', nextStep, false);
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
-		if (simData.dimension)
-			delta = canvas.height/simData.dimension;
 	});
 }
 
@@ -101,6 +101,7 @@ function info(msg){//Message INFO from engine
 
 function redraw() {
 	context.clearRect(0,0,canvas.width, canvas.height);
+	delta = canvas.height/simData.dimension;
 	for (var i = simData.nodes.length - 1; i >= 0; i--) {
 		var node = simData.nodes[i];
 		var image;
@@ -114,7 +115,7 @@ function redraw() {
 		} else if (node.type == "ROUTER"){
 			image = imageRouter;
 		}
-		context.drawImage(image,delta*node.x,delta*node.y,30,image.height * 30 / image.width);
+		context.drawImage(image, delta*(node.x+image.width/2),delta*(node.y+image.height/2), SIZE, image.height*SIZE/image.width);
 	}
 }
 
