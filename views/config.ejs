@@ -10,7 +10,7 @@
           <h3 class="panel-title">Scene parameters</h3>
         </div>
         <div class="panel-body">
-          <% config.scene1.params.forEach(function(param){ %>
+          <% scene.params.forEach(function(param){ %>
           <%- include('parameter', {param: param}) -%>
           <% }); %>
           <div class="form-group">
